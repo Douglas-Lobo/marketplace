@@ -36,4 +36,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    //Mapeamento da relação 1:1 de usuario e loja
+    public function store(){
+        return $this->hasOne(Store::class);
+    }
+
+
 }

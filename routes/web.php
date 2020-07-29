@@ -12,30 +12,54 @@ use \App\User;
 */
 
 Route::get('/', function () {
-    $hello = "pinto";
+    $hello = "CU";
     return view('welcome', compact('hello'));
 });
 
 
-Route::get('/model', function () {
-    // $products = \App\Product::all();
+// Route::get('/model', function () {
+//     // $products = \App\Product::all();
 
-    // $user = new \App\User();
+//     // $user = new \App\User();
 
-    $user =  User::find(1);
-    $user->name = 'PIRU';
-    // $user->email = 'email@teste.com';
-    // $user->password = bcrypt('12345678');
+//     $user =  User::find(1);
+//     $user->name = 'PIRU';
+//     // $user->email = 'email@teste.com';
+//     // $user->password = bcrypt('12345678');
 
-    // $user->save(); //SERVE PARA CRIAR UM NOVO REGISTRO OU ALTERAR
+//     // $user->save(); //SERVE PARA CRIAR UM NOVO REGISTRO OU ALTERAR
     
-    return $user;
+//     return $user;
     
-    // return $products;
-});
+//     // return $products;
+// });
 
 Route::get('/model/teste', function () {
 
     return '<h1> PINTO </h1>';
     
+});
+
+Route::get('/model', function () {
+    //return User::all();
+    //  return User::where('name', 'Douglas')->get();
+    // return User::where('name', 'Dee Jast')->first();
+    // return User::paginate(10);
+
+
+    //NECESSITA DO FILLABLE NO MODEL 
+        // $user = User::create([
+        //     'name' => 'Douglas',
+        //     'email' => 'db@cmi.com',
+        //     'password' => bcrypt('123123')
+        // ]);
+
+
+    // $user = User::find(4);
+
+    // return $user->store;
+
+    $loja = \App\Store::find(8);
+    return $loja->products;
+
 });
