@@ -59,7 +59,74 @@ Route::get('/model', function () {
 
     // return $user->store;
 
-    $loja = \App\Store::find(8);
-    return $loja->products;
+    // $loja = \App\Store::find(7);
+    // return $loja->products->where('id',7)->get();
+
+    // $loja = \App\Store::find(7);
+    // return $loja->products()->count();
+
+    // $dono = User::find(2);
+    // return $dono->store()->count(); 
+
+    //criar uma loja pra um usuario
+    // $user = User::find(10);
+    // $user->store()->create([
+    //     'name'=> 'Loja teste',
+    //     'description'=> 'Loja teste sei la uma coisa ai',
+    //     'mobile_phone'=>  '12312312',
+    //     'phone'=>  '123123',
+    //     'slug'=>  'loja-teste'
+    // ]);
+
+    //Criar um produto para uma loja
+    // $store = \App\Store::find(41);
+    // $prod = $store->products()->create([
+    //     'name' => 'Produto teste',
+    //     'description' => 'teste teste sei la',
+    //     'body' => 'body meu pau',
+    //     'price' => 2999.30,
+    //     'slug' => 'produto-teste'
+
+    // ]);
+    //     dd($prod);
+
+
+    //criar uma categoria
+    // \App\Category::create([
+    //     'name' => 'games',
+    //     'description' => 'para gamerss',
+    //     'slug' => 'games',
+
+    // ]);
+
+    // \App\Category::create([
+    //     'name' => 'notebooks',
+    //     'description' => 'para notebookerss',
+    //     'slug' => 'notebook',
+
+    // ]);
+
+    // return \App\Category::all();
+            
+    //adicionar uma categoria a um produto
+    // $prod = \App\Product::find(41);
+    // $prod->categories()->attach([1,2]);//add os id ao produto
+    // $prod->categories()->detach([1,2]);//remove os ids do produto
+    // $prod->categories()->sync([1,2]);  //remove todos e adiciona somente os passados
 
 });
+
+
+
+Route::prefix('admin')->namespace('Admin')->group(function(){
+   
+    Route::prefix('stores')->group(function(){
+        Route::get('/', 'StoreController@index');
+        Route::get('/create', 'StoreController@create');
+        Route::post('/store', 'StoreController@store')->name('store');
+        Route::get('/{store}/edit', 'StoreController@edit');
+        Route::post('/update/{store}', 'StoreController@update');
+    });
+
+});
+    

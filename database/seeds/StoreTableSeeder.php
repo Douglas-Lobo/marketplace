@@ -21,3 +21,5 @@ class StoreTableSeeder extends Seeder
         }
     }
 }
+
+
