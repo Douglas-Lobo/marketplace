@@ -117,16 +117,30 @@ Route::get('/model', function () {
 });
 
 
+//Prefixo - URL
+//Namespace - pasta
+//Name - Apelido da rota
 
-Route::prefix('admin')->namespace('Admin')->group(function(){
+
+Route::prefix('admin')->namespace('Admin')->name('admin.')->group(function(){
    
-    Route::prefix('stores')->group(function(){
-        Route::get('/', 'StoreController@index');
-        Route::get('/create', 'StoreController@create');
+    Route::prefix('stores')->name('stores.')->group(function(){
+
+        Route::get('/', 'StoreController@index')->name('index');
+
+        Route::get('/create', 'StoreController@create')->name('create');
         Route::post('/store', 'StoreController@store')->name('store');
-        Route::get('/{store}/edit', 'StoreController@edit');
-        Route::post('/update/{store}', 'StoreController@update');
+
+        Route::get('/{store_id}/edit', 'StoreController@edit')->name('edit'); //o nome do parametro pode ser diferente na chamada do metodo
+        Route::post('/update/{store_id}', 'StoreController@update')->name('update');
+
+        Route::get('/destroy/{store_id}', 'StoreController@destroy')->name('destroy');
+
+
     });
+
+    
+
 
 });
     

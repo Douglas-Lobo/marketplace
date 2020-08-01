@@ -3,6 +3,7 @@
 @section('title', 'Lojas')
 @section('content')
 
+<a href=" {{ route('admin.stores.create') }} " class="btn btn-sm btn-primary">Criar loja</a>
 <table class="table">
   <thead class="thead-dark">
     <tr>
@@ -22,7 +23,10 @@
         <td>{{ $store->description }}</td>
         <td>{{ $store->phone }}</td>
         <td>{{ $store->mobile_phone }}</td>
-        <td><button type="button" class="btn btn-primary">Primary</button> <br> <button type="button" class="btn btn-primary">Primary</button></td>
+        <td> 
+          <a href="{{route('admin.stores.edit', ['store_id' => $store->id])}}" class="btn bt-sm btn-warning">EDITAR</a> 
+          <a href="{{route('admin.stores.destroy', ['store_id' => $store->id])}}" class="btn bt-sm btn-danger">REMOVER</a> 
+        </td>
         </tr>
     @endforeach
   </tbody>

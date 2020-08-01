@@ -2,7 +2,7 @@
 @section('title', 'Atualizar Loja')
 @section('content')
 
-<form action="/admin/stores/update/{{$store->id}}" method="post">
+<form action="{{ route('admin.stores.update',['store_id' => $store->id]) }}" method="post">
 
     @csrf
 

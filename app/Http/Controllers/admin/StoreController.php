@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Store;
 use App\User;
+
 class StoreController extends Controller
 {
     public function index(){
@@ -29,13 +30,15 @@ class StoreController extends Controller
         $data = $req->all();
         $user = User::find($data['user']);
         $store = $user->store()->create($data);
-
-        return $store;
+        
+        flash('Loja criada com sucesso')->success(); 
+        
+        return redirect()->route('admin.stores.index');
     }
 
-    public function edit($store){
+    public function edit($store_id){
 
-        $store = Store::find($store);
+        $store = Store::find($store_id);
 
         return view('admin.stores.edit', compact('store'));
 
@@ -49,8 +52,21 @@ class StoreController extends Controller
         $store = Store::find($store);
         $store->update($data);
 
-        return $store;
+        
+        flash('Loja atualizada com sucesso')->important()->success();
+        
+        return redirect()->route('admin.stores.index');
 
+    }
+
+    public function destroy($store_id){
+
+        $store = Store::find($store_id);
+        $store->delete();
+
+        flash('Loja removida com sucesso')->success(); 
+        
+        return redirect()->route('admin.stores.index');
 
     }
 

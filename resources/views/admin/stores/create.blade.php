@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form action="{{route('store')}}" method="post">
+<form action="{{ route('admin.stores.store') }}" method="post">
 
     @csrf
 
@@ -35,7 +35,7 @@
     <label >Usuario</label>
     <select class="form-control" name='user'>
         @foreach($users as $user)
-            <option {{ $user->id }} >{{ $user->name }}</option>
+            <option value='{{ $user->id }}'>{{ $user->name }}</option>
         @endforeach
     </select>
   </div>
