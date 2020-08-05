@@ -1,40 +1,78 @@
 @extends('layouts.app')
-@section('title', 'Atualizar Loja')
+
+
 @section('content')
+    <h1>Atualizar Produto</h1>
 
-<form action="{{ route('admin.products.update',['product' => $product->id]) }}" method="post">
+    <form action="{{route('admin.products.update', ['product' => $product->id])}}" method="post">
+        @csrf
+        @method("PUT")
 
-    @csrf
+        <div class="form-group">
+            <label>Nome Produto</label>
+            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" value="{{$product->name}}">
 
-    @method('PUT')
+            @error('name')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror
+        </div>
 
-  <div class="form-group">
-    <label >Nome produto</label>
-    <input type="text" class="form-control" name='name' value='{{$product->name}}'>
-  </div>
+        <div class="form-group">
+            <label>Descrição</label>
+            <input type="text" name="description" class="form-control @error('description') is-invalid @enderror" value="{{$product->description}}">
 
-  <div class="form-group">
-    <label >Description</label>
-    <input type="text" class="form-control" name='description' value='{{$product->description}}'>
-  </div>
+            @error('description')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror
+        </div>
 
-  <div class="form-group">
-    <label >Preço</label>
-    <input type="text" class="form-control" name='price' value='{{$product->price}}'>
-  </div>
+        <div class="form-group">
+            <label>Conteúdo</label>
+            <textarea name="body" id="" cols="30" rows="10" class="form-control @error('body') is-invalid @enderror">{{$product->body}}</textarea>
 
-  <div class="form-group">
-    <label >Conteudo</label>
-    <textarea type="text" class="form-control" name='body'>{{$product->body}}</textarea>
-  </div>
-  
-  <div class="form-group">
-    <label >Slug</label>
-    <input type="text" class="form-control" name='slug' value='{{$product->slug}}'>
-  </div>
-  
-  <button type="submit" class="btn btn-primary">Submit</button>
+            @error('body')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror
+        </div>
 
-</form>
 
+        <div class="form-group">
+            <label>Preço</label>
+            <input type="text" name="price" class="form-control @error('price') is-invalid @enderror" value="{{$product->price}}">
+
+            @error('price')
+            <div class="invalid-feedback">
+                {{$message}}
+            </div>
+            @enderror
+        </div>
+
+        <div class="form-group">
+            <label>Categorias</label>
+            <select name="categories[]" class="form-control" multiple>
+                @foreach($categories as $category)
+                    <option value="{{$category->id}}"
+                        @if($product->categories->contains($category)) selected @endif
+
+                    >{{$category->name}}</option>
+                @endforeach
+            </select>
+
+        </div>
+
+        <div class="form-group">
+            <label>Slug</label>
+            <input type="text" name="slug" class="form-control" value="{{$product->slug}}">
+        </div>
+
+        <div>
+            <button type="submit" class="btn btn-lg btn-success">Atualizar Produto</button>
+        </div>
+    </form>
 @endsection

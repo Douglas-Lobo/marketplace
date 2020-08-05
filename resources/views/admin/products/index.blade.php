@@ -10,6 +10,7 @@
       <th scope="col">id</th>
       <th scope="col">Nome</th>
       <th scope="col">Preço</th>
+      <th scope="col">Loja</th>
       <th scope="col">Ações</th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
         <th scope="row">{{ $product->id }}</th>
         <td>{{ $product->name }}</td>
         <td>{{ $product->price }}</td>
+        <td>{{ $product->store->name }}</td>
         <td> 
 
           <div class="btn-group">
